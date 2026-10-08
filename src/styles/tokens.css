@@ -1,0 +1,21 @@
+:root {
+  color-scheme: dark;
+  --bg: #08090a;
+  --panel: #141517;
+  --panel-deep: #0e0f11;
+  --text: #f5f5f3;
+  --muted: #c0c1c3;
+  --quiet: #9b9da1;
+  --lime: #c6f36b;
+  --line: #34363a;
+  --danger: #f6b777;
+  --font: 'Manrope Variable', 'Arial', sans-serif;
+  --mono: 'Consolas', 'Courier New', monospace;
+  --content-width: 1400px;
+  --radius: 3px;
+  --display-font: 'Georgia', 'Times New Roman', serif;
+  --ease: cubic-bezier(.2,.8,.2,1);
+  --motion-fast: 220ms;
+  --motion-medium: 600ms;
+  --orbit-duration: 55s;
+}

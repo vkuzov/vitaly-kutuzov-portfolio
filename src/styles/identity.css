@@ -1,0 +1,264 @@
+/* Neutral dossier identity. Layout/content primitives remain in main.css. */
+#root { isolation: isolate; }
+.site-shell { z-index: 1; }
+.main-nav { font-size: 16px; gap: 36px; }
+.wordmark-name { font-size: 14px; }
+.button, .text-link { font-size: 15px; border-radius: 2px; }
+.hero { padding-top: 70px; column-gap: clamp(35px, 5vw, 90px); align-items: center; }
+.hero-copy { min-width: 0; position: relative; }
+.hero-label { font-size: 12px; margin-bottom: 24px; }
+.hero h1.hero-name { font-family: var(--display-font); font-size: clamp(4.6rem, 8.6vw, 8.5rem); font-weight: 400; letter-spacing: -.075em; line-height: .98; max-width: 8.4em; text-wrap: balance; color: var(--text); }
+.hero-statement { font-size: clamp(1.4rem, 2.4vw, 2rem); color: var(--text); letter-spacing: -.035em; line-height: 1.45; margin-top: 34px; }
+.hero-statement > span { color: var(--muted); }
+.hero-description { font-size: 17px; line-height: 1.85; margin-top: 21px; }
+.hero-bottom { margin-top: 70px; }
+.hero-bottom .eyebrow, .hero-bottom > a { font-size: 13px; }
+.profile-wrap { align-self: center; margin-top: 0; }
+.profile-orbit { display: none; }
+.profile-card { border-radius: 0; padding: 20px; box-shadow: 13px 13px 0 -1px var(--bg), 13px 13px 0 0 #34363a; }
+.profile-top { border-bottom: 1px solid var(--line); margin-bottom: 16px; padding-bottom: 12px; }
+.profile-top .eyebrow { color: var(--muted); font-size: 11px; }
+.profile-photo { background: repeating-linear-gradient(0deg, transparent 0 29px, #ffffff09 29px 30px), repeating-linear-gradient(90deg, transparent 0 29px, #ffffff09 29px 30px), #101113; }
+.profile-photo::after { content: ''; position: absolute; pointer-events: none; top: 54%; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, #c6f36b8c, transparent); box-shadow: 0 0 12px #c6f36b20; }
+.profile-initials { font-family: var(--display-font); font-weight: 400; font-size: 110px; }
+.profile-photo img { object-position: 50% 25%; }
+.profile-info strong { font-size: 20px; }
+.profile-info p { font-size: 14px; }
+.dossier-fields { margin: 0 0 17px; display: grid; gap: 12px; }
+.dossier-fields > div { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px 12px; }
+.dossier-fields dt { font: 10px/1.7 var(--mono); color: var(--quiet); letter-spacing: .06em; }
+.dossier-fields dd { margin: 0; font-size: 12px; color: var(--text); }
+.profile-bottom { font-size: 10px; }
+.profile-caption { font-size: 10px; margin-top: 30px; }
+.content-section, .case-section { position: relative; background: transparent; padding-block: 110px; }
+.content-section::after { content: '+'; font: 18px var(--mono); position: absolute; right: 0; bottom: -10px; color: var(--lime); background: var(--bg); padding-left: 9px; }
+.section-heading h2, .about-header h2 { font-size: clamp(2.2rem, 3.8vw, 3.6rem); }
+.section-aside { font-size: 16px; max-width: 350px; }
+.project-card { border: 0; border-radius: 0; background: transparent; overflow: visible; grid-template-columns: 1.3fr 1fr; gap: 48px; }
+.project-image-link { margin: 0; align-self: start; border-radius: 2px; }
+.project-description { padding: 12px 0; background: linear-gradient(90deg, #08090ade, #08090a70); }
+.project-description h3 { font-size: 60px; }
+.project-description > p, .opportunity > p, .about-copy p, .skill > p, .case-feature p, .case-brief p:not(.eyebrow), .architecture-list article p, .qa-material > p:not(.eyebrow):not(.source-label), .case-section-intro { font-size: 16px; line-height: 1.85; }
+.project-stack { font-size: 12px; }
+.tags span { font-size: 12px; border-radius: 1px; }
+.qa-intro { background: radial-gradient(ellipse at 30% 50%, #08090ae6, transparent 75%); }
+.qa-intro > p:not(.eyebrow):not(.qa-overline) { font-size: 17px; }
+.qa-overline { font-size: 16px; }
+.qa-demo { border-radius: 2px; border-top-color: #b5be9b; }
+.demo-top .eyebrow, .demo-live { font-size: 12px; }
+.amount-field legend, .condition, .receipt > div, .bug-toggle, summary { font-size: 14px; }
+.amount-options button small, .fine-print, .receipt-status { font-size: 12px; }
+.condition code { font-size: 14px; }
+.receipt { border-radius: 1px; }
+.opportunity-grid { gap: 60px; }
+.opportunity { padding: 32px 0 0; border-width: 1px 0 0; border-radius: 0; background: linear-gradient(180deg, #08090ace, transparent); }
+.opportunity h3 { font-family: var(--display-font); font-size: clamp(2.5rem, 4vw, 3.8rem); font-weight: 400; }
+.opportunity-symbol { border: 0; width: auto; font-size: 36px; }
+.opportunity > .text-link { border-top: 0; padding-top: 12px; justify-content: flex-start; }
+.skills-grid { gap: 40px; }
+.skill { border-top-color: #51545a; }
+.skill h3 { font-size: 24px; }
+.skill-tags span { font-size: 12px; }
+.education { border-width: 0 0 0 2px; border-left-color: var(--lime); border-radius: 0; background: linear-gradient(90deg, #151619d9, transparent); }
+.education p { font-size: 15px; }
+.document-placeholder { font-size: 12px; }
+.contact-content h2 { font-family: var(--display-font); font-weight: 400; font-size: clamp(3rem, 5.6vw, 5.5rem); }
+.contact-content h2 span { color: var(--text); }
+.contact-content p { font-size: 17px; }
+.contact-placeholder { border-radius: 0; background: #101113c9; }
+.contact-placeholder p { font-size: 14px; }
+.case-feature { border-width: 1px 0 0; border-radius: 0; background: #08090a88; padding-inline: 0; }
+.case-feature-grid { gap: 32px 60px; }
+.evidence-note { background: #111214ee; }
+.gallery { border-radius: 2px; }
+.gallery-caption p { font-size: 16px; }
+.spotlight::before { background: radial-gradient(400px circle at var(--spot-x, 50%) var(--spot-y, 50%), #dce8c011, transparent 75%); }
+
+/* Fixed decoration is above the body paint and below all content, never a hit target. */
+.ambient { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; contain: strict; background: transparent; }
+.ambient-glow { position: absolute; inset: 0; background: radial-gradient(ellipse at 100% 25%, #c6f36b06, transparent 48%); }
+.parallax-layer { position: absolute; inset: -12%; transform-origin: 50% 50%; will-change: transform; }
+.grid-field { position: absolute; inset: -15%; background-image: linear-gradient(#ffffff09 1px, transparent 1px), linear-gradient(90deg, #ffffff09 1px, transparent 1px); background-size: 140px 140px; mask-image: linear-gradient(90deg, #000, transparent 32%, transparent 68%, #000); }
+.light-orbit { position: absolute; width: 150%; height: 65%; border: 1px solid #c6f36b30; border-radius: 50%; transform: rotate(-28deg); }
+.light-orbit::before { content: ''; position: absolute; inset: -1px; border-radius: inherit; border: 1px solid transparent; border-top-color: #c6f36b91; filter: drop-shadow(0 0 4px #b7e56865); mask-image: linear-gradient(90deg, transparent 12%, #000 50%, transparent 88%); }
+.light-orbit > span { position: absolute; top: 0; left: 50%; width: 4px; height: 4px; background: var(--lime); box-shadow: 0 0 10px #c6f36b80; }
+.orbit-0 { top: 12%; left: -30%; transform: rotate(-24deg); opacity: .55; }
+.orbit-1 { top: 35%; left: -14%; width: 130%; height: 48%; transform: rotate(36deg); }
+.orbit-2 { top: 0; left: 55%; width: 36%; height: 115%; transform: rotate(23deg); opacity: .75; }
+.tech-mark { position: absolute; color: #c6f36b9c; font: 23px var(--mono); }
+.tech-mark small { display: block; font-size: 10px; letter-spacing: .08em; white-space: nowrap; }
+.mark-one { top: 27%; left: 12%; }
+.mark-two { top: 67%; right: 12%; }
+.mark-three { top: 45%; left: 16%; }
+.ambient[data-motion='off'] .parallax-layer { transform: none !important; will-change: auto; }
+@media (min-width: 1450px) {
+  .hero { grid-template-columns: minmax(0, 1fr) 330px; padding-top: 82px; gap: 70px; }
+  .hero-bottom { margin-top: 0; }
+  .profile-photo { height: 245px; }
+}
+@media (max-width: 1100px) {
+  .main-nav { gap: 23px; font-size: 15px; }
+  .hero h1.hero-name { font-size: clamp(4rem, 8vw, 6rem); }
+  .hero-description { font-size: 16px; }
+  .profile-card { padding: 15px; }
+  .profile-info strong { font-size: 18px; }
+  .profile-info p { font-size: 12px; }
+  .profile-caption { font-size: 9px; }
+  .project-card { gap: 30px; }
+  .project-description h3 { font-size: 47px; }
+  .demo-live { display: none; }
+}
+@media (max-width: 760px) {
+  .main-nav { font-size: 16px; }
+  .hero { padding-top: 45px; }
+  .hero-label { font-size: 10px; letter-spacing: .035em; }
+  .hero h1.hero-name { font-size: clamp(3.4rem, 13vw, 6rem); max-width: 8em; }
+  .hero-statement { font-size: clamp(1.25rem, 4.5vw, 1.7rem); margin-top: 25px; }
+  .hero-description { font-size: 16px; }
+  .hero .button { font-size: 14px; }
+  .hero-bottom { margin-top: 35px; }
+  .hero-bottom .eyebrow { font-size: 10px; }
+  .hero-bottom > a { font-size: 12px; }
+  .profile-wrap { margin-top: 40px; }
+  .profile-card { grid-template-columns: 100px minmax(0, 1fr); gap: 0 16px; padding: 17px; box-shadow: 6px 6px 0 -1px var(--bg), 6px 6px 0 0 #34363a; }
+  .profile-top { padding-bottom: 8px; margin-bottom: 9px; }
+  .profile-top .eyebrow { font-size: 10px; }
+  .profile-photo { height: 150px; }
+  .profile-initials { font-size: 56px; }
+  .profile-info { padding-bottom: 12px; }
+  .profile-info strong { font-size: 18px; }
+  .profile-info p { font-size: 12px; }
+  .dossier-fields { grid-column: 2; grid-row: 3; gap: 6px; margin-bottom: 12px; }
+  .dossier-fields dt { font-size: 9px; }
+  .dossier-fields dd { font-size: 11px; }
+  .profile-bottom { grid-column: 1 / -1; grid-row: 4; font-size: 10px; padding-top: 10px; }
+  .content-section, .case-section { padding-block: 66px; }
+  .project-card { grid-template-columns: 1fr; gap: 22px; }
+  .project-description { padding: 0; }
+  .project-description h3 { font-size: 42px; }
+  .section-heading h2, .about-header h2 { font-size: 34px; }
+  .section-aside { font-size: 15px; }
+  .qa-intro > p:not(.eyebrow):not(.qa-overline) { font-size: 16px; }
+  .demo-top .eyebrow { font-size: 11px; }
+  .condition { flex-wrap: wrap; }
+  .opportunity-grid { gap: 36px; }
+  .opportunity { padding-top: 25px; }
+  .opportunity h3 { font-size: 42px; }
+  .skills-grid { gap: 30px; }
+  .education { padding: 20px 16px; }
+  .contact-content h2 { font-size: clamp(2.2rem, 8vw, 3.8rem); }
+  .contact-content p { font-size: 16px; }
+  .contact-arrow { font-size: 42px; }
+  .gallery-caption p { font-size: 14px; }
+  .case-feature-grid { gap: 26px; }
+  .depth-near, .grid-field { display: none; }
+  .parallax-layer { inset: -8%; }
+  .light-orbit { width: 220%; left: -55%; opacity: .55; }
+  .tech-mark { display: block; }
+  .tech-mark small { font-size: 8px; }
+  .mark-one { left: 8%; }.mark-two { right: 9%; }
+}
+@media (max-width: 380px) {
+  .hero h1.hero-name { font-size: 3.35rem; }
+  .hero-label { font-size: 9px; }
+  .hero .button { font-size: 13px; padding-inline: 12px; gap: 10px; }
+  .profile-card { grid-template-columns: 74px minmax(0, 1fr); gap: 0 12px; padding: 12px; }
+  .profile-initials { font-size: 45px; }
+  .profile-info strong { font-size: 16px; }
+  .profile-info p { font-size: 11px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .parallax-layer { transform: none !important; will-change: auto; }
+}
+
+/* Reading masks follow the actual text boxes, including when columns stack. */
+:where(.hero-copy, .section-heading > div, .section-aside, .project-description,
+  .qa-intro, .opportunity, .about-header > div, .skill, .contact-content > div,
+  .case-head, .case-lead, .case-brief > div, .case-section > h2,
+  .case-section-intro, .architecture-list article > div, .qa-material,
+  .case-material-actions, .dossier-skill-block, .contact-method) {
+  position: relative;
+  isolation: isolate;
+}
+:where(.hero-copy, .section-heading > div, .section-aside, .project-description,
+  .qa-intro, .opportunity, .about-header > div, .skill, .contact-content > div,
+  .case-head, .case-lead, .case-brief > div, .case-section > h2,
+  .case-section-intro, .architecture-list article > div, .qa-material,
+  .case-material-actions, .dossier-skill-block, .contact-method)::after {
+  content: '';
+  position: absolute;
+  inset: -22px -30px;
+  z-index: -2;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, #08090af5 20%, #08090ade 49%, #08090a75 66%, transparent 78%);
+  filter: blur(12px);
+}
+.project-description, .qa-intro, .opportunity { background: transparent; }
+.light-orbit { border-color: #c6f36b16; }
+.light-orbit::before { border-top-color: #c6f36b36; filter: none; }
+.light-orbit > span { width: 2px; height: 2px; opacity: .5; box-shadow: none; }
+.orbit-0 { opacity: .3; }
+.orbit-2 { opacity: .28; }
+/* The middle layer remains present on phones and carries the leading line. */
+.orbit-1 { opacity: 1; border-color: #c6f36b30; }
+.orbit-1::before { border-top-width: 1.5px; border-top-color: #c6f36be6; filter: drop-shadow(0 0 3px #c6f36b99) drop-shadow(0 0 9px #c6f36b40); }
+.orbit-1 > span { width: 4px; height: 4px; opacity: 1; box-shadow: 0 0 9px #c6f36b80; }
+.hero-description { font-size: 19px; line-height: 1.55; max-width: 55ch; }
+.case-lead { font-size: 20px; line-height: 1.55; max-width: 60ch; }
+.case-feature p, .case-brief p:not(.eyebrow), .architecture-list article p:not(.source-label),
+.qa-material > p:not(.eyebrow):not(.source-label), .case-section-intro {
+  font-size: 18px; line-height: 1.55; max-width: 65ch;
+}
+.profile-photo::after {
+  top: 0; opacity: 0;
+  background: linear-gradient(90deg, transparent, #c6f36bcc 20%, #e2ffb7 50%, #c6f36bcc 80%, transparent);
+  box-shadow: 0 0 9px #c6f36b66;
+  animation: dossier-scan 8.5s linear infinite;
+}
+/* A 3.5 second pass followed by a 5 second pause. */
+@keyframes dossier-scan {
+  0% { top: 0; opacity: 0; }
+  2% { opacity: .85; }
+  39% { opacity: .85; }
+  41.176%, 100% { top: 100%; opacity: 0; }
+}
+.profile-info .cooperation-status { display: flex; align-items: center; gap: 8px; font-size: 13px; line-height: 1.5; margin: 9px 0; color: var(--text); }
+.cooperation-status i { width: 6px; height: 6px; flex: 0 0 6px; border-radius: 50%; background: #8be6a1; opacity: .8; box-shadow: 0 0 5px #8be6a133; animation: cooperation-pulse 3s ease-in-out infinite; }
+@keyframes cooperation-pulse { 0%, 100% { opacity: .6; box-shadow: 0 0 3px #8be6a122; } 50% { opacity: 1; box-shadow: 0 0 7px #8be6a155; } }
+.dossier-skills { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 48px; margin-top: 50px; width: 100%; }
+.dossier-skills-label { grid-column: 1 / -1; }
+.dossier-skill-block { min-width: 0; padding: 21px 0 0; border-top: 1px solid var(--line); }
+.dossier-skill-block h2 { font: 14px/1.5 var(--mono); letter-spacing: .1em; color: var(--lime); }
+.dossier-skill-labels { display: flex; flex-wrap: wrap; list-style: none; padding: 0; gap: 7px; margin: 16px 0 20px; }
+.dossier-skill-labels li { padding: 4px 9px; border: 1px solid #383b40; font-size: 13px; line-height: 1.5; }
+.dossier-skill-block summary { padding-block: 12px; }
+.dossier-skill-details { font-size: 15px; line-height: 1.65; color: var(--muted); padding: 8px 0; }
+.dossier-skill-details h3 { font-size: 16px; color: var(--text); line-height: 1.5; }
+.dossier-skill-details ul { padding-left: 20px; margin-block: 10px 23px; }
+.dossier-skill-details li + li { margin-top: 8px; }
+.contact-links { display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, 1fr)); gap: 24px; }
+.contact-method { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 9px 12px; padding: 20px 0; border-block: 1px solid var(--line); min-width: 0; }
+.contact-method-label { grid-column: 1; color: var(--quiet); font-size: 13px; }
+.contact-method-value { grid-column: 1; font-size: 17px; line-height: 1.5; overflow-wrap: anywhere; }
+.contact-method-arrow { grid-column: 2; grid-row: 1 / 3; align-self: center; font-size: 24px; color: var(--lime); }
+.contact-method:hover { color: var(--lime); border-color: #8a9a6a; }
+@media (max-width: 1100px) {
+  .contact-links { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+}
+@media (max-width: 760px) {
+  .hero-description, .case-lead { font-size: 18px; line-height: 1.55; }
+  .hero-description .desktop-break { display: none; }
+  .case-feature p, .case-brief p:not(.eyebrow), .architecture-list article p:not(.source-label),
+  .qa-material > p:not(.eyebrow):not(.source-label), .case-section-intro { font-size: 17px; line-height: 1.55; }
+  .dossier-skills { grid-template-columns: minmax(0, 1fr); gap: 22px; margin-top: 36px; }
+  .profile-info .cooperation-status { font-size: 12px; gap: 6px; }
+  .orbit-0 { opacity: .22; }
+  .orbit-1 { opacity: .85; }
+  .contact-method-value { font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .profile-photo::after { display: none; animation: none; }
+  .cooperation-status i { animation: none; opacity: .85; }
+}
+html[data-motion='off'] .profile-photo::after { display: none; }
+html[data-motion='off'] .cooperation-status i { animation: none; opacity: .85; }

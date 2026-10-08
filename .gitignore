@@ -1,0 +1,9 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.local/
+.env*
+!.env.example
+qa-assignment/
+Фото визитка.png
+*.log
