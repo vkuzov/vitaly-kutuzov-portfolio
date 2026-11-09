@@ -1,0 +1,151 @@
+name: Deploy portfolio to REG.RU
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Verify SSH and preview the upload without writing to REG.RU
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-kutuzov-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: '24'
+      - uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+        with:
+          version: '11.19.0'
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Build for the domain root
+        env:
+          VITE_BASE_PATH: /
+        run: pnpm build
+      - name: Validate dist
+        shell: bash
+        run: |
+          test -s dist/index.html
+          test -s dist/404.html
+          test -s dist/projects/starfood/index.html
+          test -s dist/images/skillbox-certificate.jpg
+          test -s dist/materials/starfood-qa.md
+          test -s dist/favicon.svg
+          test -d dist/assets
+          grep -q 'src="/assets/' dist/index.html
+          grep -q 'href="/assets/' dist/index.html
+          grep -q 'href="/favicon.svg"' dist/index.html
+          test -z "$(find dist ! -type f ! -type d -print -quit)"
+      - name: Report inactive deployment
+        if: vars.REG_RU_DEPLOY_ENABLED != 'true' && !(github.event_name == 'workflow_dispatch' && inputs.dry_run)
+        run: echo "::notice::REG.RU upload is disabled. Configure SSH secrets and verify the manual dry run before enabling it."
+      - name: Verify SSH and sync dist
+        if: vars.REG_RU_DEPLOY_ENABLED == 'true' || (github.event_name == 'workflow_dispatch' && inputs.dry_run)
+        shell: bash
+        env:
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
+          REG_RU_HOST: ${{ secrets.REG_RU_HOST }}
+          REG_RU_PORT: ${{ secrets.REG_RU_PORT }}
+          REG_RU_USER: ${{ secrets.REG_RU_USER }}
+          REG_RU_SSH_KEY: ${{ secrets.REG_RU_SSH_KEY }}
+          REG_RU_KNOWN_HOSTS: ${{ secrets.REG_RU_KNOWN_HOSTS }}
+        run: |
+          for name in REG_RU_HOST REG_RU_PORT REG_RU_USER REG_RU_SSH_KEY REG_RU_KNOWN_HOSTS; do
+            if [[ -z ${!name} ]]; then
+              echo "::error::Missing GitHub secret: $name"
+              exit 1
+            fi
+          done
+          if ! [[ $REG_RU_HOST =~ ^[A-Za-z0-9][A-Za-z0-9.-]*$ &&
+                  $REG_RU_USER =~ ^[A-Za-z0-9_][A-Za-z0-9_.-]*$ &&
+                  $REG_RU_PORT =~ ^[1-9][0-9]{0,4}$ ]] || (( REG_RU_PORT > 65535 )); then
+            echo "::error::Invalid REG.RU SSH host, user or port"
+            exit 1
+          fi
+
+          umask 077
+          ssh_dir=$(mktemp -d "$RUNNER_TEMP/reg-ru-ssh.XXXXXXXX")
+          trap 'rm -f -- "$ssh_dir/key" "$ssh_dir/known_hosts" "$ssh_dir/config" "$ssh_dir/response"; rmdir -- "$ssh_dir"' EXIT
+          printf '%s\n' "$REG_RU_SSH_KEY" | tr -d '\r' > "$ssh_dir/key"
+          printf '%s\n' "$REG_RU_KNOWN_HOSTS" | tr -d '\r' > "$ssh_dir/known_hosts"
+          unset REG_RU_SSH_KEY REG_RU_KNOWN_HOSTS
+          cat > "$ssh_dir/config" <<EOF
+          Host reg-ru-deploy
+            HostName $REG_RU_HOST
+            Port $REG_RU_PORT
+            User $REG_RU_USER
+            IdentityFile "$ssh_dir/key"
+            UserKnownHostsFile "$ssh_dir/known_hosts"
+            GlobalKnownHostsFile /dev/null
+            StrictHostKeyChecking yes
+            IdentitiesOnly yes
+            BatchMode yes
+            ConnectTimeout 10
+          EOF
+
+          # /www/kutuzov.online/ in the hosting panel is relative to the SSH home.
+          # Run the path checks on the server in the same invocation as rsync.
+          remote_rsync='set -eu;
+            home=$(cd -P "$HOME" && pwd -P);
+            target="${home%/}/www/kutuzov.online";
+            cd -P "$target" &&
+            test "$(pwd -P)" = "$target" &&
+            test -w . ||
+              { echo "REG.RU: missing, unwritable or redirected portfolio document root" >&2; exit 1; };
+            for entry in index.html 404.html favicon.svg assets images materials projects; do
+              if test -e "$entry" || test -L "$entry"; then
+                unsafe=$(find "$entry" ! -type d ! -type f -print -quit);
+                if test -n "$unsafe"; then
+                  echo "REG.RU: refusing a symlink or special file in the upload path" >&2;
+                  exit 1;
+                fi;
+              fi;
+            done;
+            exec rsync'
+          sync_args=(
+            --recursive --compress --checksum --delay-updates
+            --rsh="ssh -F '$ssh_dir/config'"
+            --rsync-path="$remote_rsync"
+          )
+          rsync "${sync_args[@]}" --dry-run --itemize-changes dist/ reg-ru-deploy:./
+          if [[ $DRY_RUN == true ]]; then
+            exit 0
+          fi
+
+          # Require working DNS and TLS before writing files to the server.
+          curl --silent --show-error --max-time 20 --output /dev/null https://kutuzov.online/
+          rsync "${sync_args[@]}" dist/ reg-ru-deploy:./
+
+          verify_page() {
+            local route=$1 expected=$2 status
+            for attempt in 1 2 3; do
+              if status=$(curl --silent --show-error --max-time 20 \
+                  --header 'Cache-Control: no-cache' --output "$ssh_dir/response" \
+                  --write-out '%{http_code}' "https://kutuzov.online${route}?deploy=${GITHUB_SHA}-${GITHUB_RUN_ATTEMPT}-${attempt}") &&
+                  [[ $status == 200 ]] && cmp -s "$expected" "$ssh_dir/response"; then
+                printf 'Verified HTTP 200 and matching HTML: %s\n' "$route"
+                return 0
+              fi
+              sleep 3
+            done
+            echo "::error::Production did not return HTTP 200 with the new HTML for $route"
+            return 1
+          }
+          verify_page / dist/index.html
+          verify_page /projects/starfood/ dist/projects/starfood/index.html
