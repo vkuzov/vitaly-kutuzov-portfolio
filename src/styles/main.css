@@ -18,7 +18,7 @@ h1, h2, h3 { font-weight: 560; }
 h2 { font-size: clamp(2.15rem, 3.4vw, 3.1rem); line-height: 1.17; letter-spacing: -.045em; }
 h3 { line-height: 1.25; letter-spacing: -.03em; }
 p { color: var(--muted); }
-.site-shell { max-width: calc(var(--content-width) + 96px); padding-inline: 48px; margin-inline: auto; position: relative; }
+.site-shell { --site-gutter: 48px; max-width: calc(var(--content-width) + 96px); padding-inline: var(--site-gutter); margin-inline: auto; position: relative; }
 .site-header { height: 105px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); gap: 30px; position: relative; z-index: 10; }
 .wordmark { display: flex; gap: 15px; align-items: center; }
 .wordmark-symbol { font-size: 37px; font-weight: 750; letter-spacing: -.095em; line-height: 1; }
@@ -246,11 +246,11 @@ details[open] summary > span { transform: rotate(45deg); }
 .gallery-loading { min-height: 400px; display: grid; place-items: center; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); }
 .empty-state { padding: 40px; border: 1px dashed var(--line); border-radius: var(--radius); }
 @media (min-width: 1450px) { .hero { padding-top: 100px; padding-bottom: 8px; grid-template-columns: minmax(0, 1fr) 325px; gap: 70px; } .hero h1 { font-size: 5.6rem; } .profile-photo { height: 270px; } .hero-bottom { margin-top: 25px; } }
-@media (max-width: 1100px) { .site-shell { padding-inline: 32px; } .hero { grid-template-columns: minmax(0, 1fr) 260px; column-gap: 35px; } .hero h1 { font-size: clamp(3rem, 5.9vw, 4.2rem); } .profile-photo { height: 205px; } .profile-info strong { font-size: 17px; } .profile-orbit { width: 310px; height: 340px; } .profile-caption { font-size: 8px; } .qa-section { gap: 45px; } .project-description { padding: 26px; } .project-description h3 { margin-top: 18px; } .project-image-link { margin: 20px 0 20px 20px; } .project-description > p { font-size: 13px; } .main-nav { gap: 24px; } .about-header { gap: 40px; } .architecture-list article { grid-template-columns: 30px 180px 1fr; } }
+@media (max-width: 1100px) { .site-shell { --site-gutter: 32px; } .hero { grid-template-columns: minmax(0, 1fr) 260px; column-gap: 35px; } .hero h1 { font-size: clamp(3rem, 5.9vw, 4.2rem); } .profile-photo { height: 205px; } .profile-info strong { font-size: 17px; } .profile-orbit { width: 310px; height: 340px; } .profile-caption { font-size: 8px; } .qa-section { gap: 45px; } .project-description { padding: 26px; } .project-description h3 { margin-top: 18px; } .project-image-link { margin: 20px 0 20px 20px; } .project-description > p { font-size: 13px; } .main-nav { gap: 24px; } .about-header { gap: 40px; } .architecture-list article { grid-template-columns: 30px 180px 1fr; } }
 @media (max-width: 900px) { .hero { grid-template-columns: minmax(0, 1fr) 230px; gap: 25px; } .hero h1 { font-size: 5.75vw; } .hero-description { font-size: 14px; } .hero .button { padding-inline: 16px; gap: 23px; font-size: 13px; } .profile-card { padding: 12px; } .profile-photo { height: 180px; } .profile-initials { font-size: 83px; } .profile-info p { font-size: 10px; } .profile-bottom { font-size: 8px; } .profile-orbit { left: -10px; width: 250px; height: 300px; } .qa-section { gap: 30px; grid-template-columns: 1fr 1.2fr; } .qa-demo { padding: 20px; } .demo-live { display: none; } .opportunity { padding: 26px; } .skills-grid { gap: 20px; } .skill h3 { font-size: 18px; } .contact-arrow { font-size: 110px; padding-right: 0; } .qa-material-grid { grid-template-columns: 1fr; gap: 26px; } .qa-material h3 { margin-block: 14px; } }
 @media (max-width: 760px) {
   html { scroll-padding-top: 24px; }
-  .site-shell { padding-inline: 22px; }
+  .site-shell { --site-gutter: 22px; }
   .site-header { height: 84px; }
   .wordmark-symbol { font-size: 32px; }
   .wordmark-name { font-size: 11px; }
@@ -357,7 +357,7 @@ details[open] summary > span { transform: rotate(45deg); }
   .evidence-note { padding: 20px; gap: 12px; }
   .case-material-actions { flex-direction: column; align-items: flex-start; }
 }
-@media (max-width: 380px) { .site-shell { padding-inline: 16px; } .hero h1 { font-size: 2.1rem; } .hero-label { font-size: 9px; } .hero-actions { gap: 10px; } .hero .button { padding: 12px 14px; gap: 13px; font-size: 12px; } .profile-card { grid-template-columns: 82px 1fr; gap: 0 13px; padding: 13px; } .profile-info strong { font-size: 17px; } .profile-bottom { font-size: 7px; } .demo-live { display: none; } .qa-demo { padding: 17px; } .amount-options button { font-size: 19px; } .condition { align-items: flex-start; } .condition > span { max-width: 160px; } .contact-arrow { display: none; } .tags { gap: 4px; } .tags span { font-size: 10px; padding: 3px 7px; } .case-head h1 { font-size: 60px; } .case-head-side { flex-wrap: wrap; } .case-material-actions .button { font-size: 12px; gap: 15px; } }
+@media (max-width: 380px) { .site-shell { --site-gutter: 16px; } .hero h1 { font-size: 2.1rem; } .hero-label { font-size: 9px; } .hero-actions { gap: 10px; } .hero .button { padding: 12px 14px; gap: 13px; font-size: 12px; } .profile-card { grid-template-columns: 82px 1fr; gap: 0 13px; padding: 13px; } .profile-info strong { font-size: 17px; } .profile-bottom { font-size: 7px; } .demo-live { display: none; } .qa-demo { padding: 17px; } .amount-options button { font-size: 19px; } .condition { align-items: flex-start; } .condition > span { max-width: 160px; } .contact-arrow { display: none; } .tags { gap: 4px; } .tags span { font-size: 10px; padding: 3px 7px; } .case-head h1 { font-size: 60px; } .case-head-side { flex-wrap: wrap; } .case-material-actions .button { font-size: 12px; gap: 15px; } }
 @media (hover: none), (pointer: coarse) { .target-cursor { display: none; } .tilted { transform: none !important; } .spotlight::before { display: none; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } .tilted, .project-image-link:hover img { transform: none !important; } .target-cursor, .spotlight::before { display: none; } }
 html[data-motion='off'] *, html[data-motion='off'] *::before, html[data-motion='off'] *::after { animation: none !important; transition: none !important; }

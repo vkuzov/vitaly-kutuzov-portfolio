@@ -187,7 +187,7 @@
   .case-material-actions, .dossier-skill-block, .contact-method)::after {
   content: '';
   position: absolute;
-  inset: -22px -30px;
+  inset: -22px calc(-1 * min(30px, var(--site-gutter)));
   z-index: -2;
   pointer-events: none;
   background: radial-gradient(ellipse at center, #08090af5 20%, #08090ade 49%, #08090a75 66%, transparent 78%);
@@ -262,3 +262,38 @@
 }
 html[data-motion='off'] .profile-photo::after { display: none; }
 html[data-motion='off'] .cooperation-status i { animation: none; opacity: .85; }
+
+.github-link { margin-top: 22px; gap: 12px; }
+.github-link svg { flex-shrink: 0; }
+.github-link > span:first-of-type { font: inherit; color: inherit; }
+.certificate-section { margin-top: 46px; }
+.certificate-section > .eyebrow { color: var(--muted); }
+.education.certificate-card { margin-top: 18px; align-items: center; gap: 32px; }
+.certificate-preview { display: block; flex: 0 0 170px; max-width: 100%; min-width: 0; border: 1px solid #41444a; }
+.certificate-preview img { width: 100%; height: auto; }
+.certificate-preview > span { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 9px 12px; font-size: 12px; color: var(--muted); background: var(--panel-deep); }
+.certificate-preview:hover { border-color: var(--lime); }
+.certificate-preview > span > span { color: var(--lime); }
+.certificate-info { flex: 1; min-width: 0; }
+.certificate-info h4 { font-size: clamp(1.25rem, 2vw, 1.6rem); font-weight: 550; line-height: 1.4; letter-spacing: -.025em; margin: 9px 0 13px; max-width: 30ch; }
+.certificate-meta { display: grid; gap: 7px; margin: 20px 0 12px; font-size: 14px; }
+.certificate-meta > div { display: flex; flex-wrap: wrap; gap: 2px 18px; }
+.certificate-meta dt { color: var(--quiet); min-width: 160px; }
+.certificate-meta dd { margin: 0; color: var(--text); overflow-wrap: anywhere; }
+.certificate-dialog { width: min(760px, calc(100% - 32px)); max-width: calc(100% - 32px); max-height: calc(100dvh - 32px); padding: 20px; color: var(--text); background: var(--panel-deep); border: 1px solid #51545a; overflow: auto; overscroll-behavior: contain; }
+.certificate-dialog::backdrop { background: #000d; }
+.certificate-dialog-header { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 16px; }
+.certificate-dialog-header h3 { font-size: 17px; }
+.certificate-dialog-header button { flex-shrink: 0; }
+.certificate-dialog > img { width: auto; max-width: 100%; height: auto; max-height: calc(100dvh - 180px); object-fit: contain; margin-inline: auto; }
+.certificate-dialog > .text-link { margin-top: 12px; }
+body:has(.certificate-dialog[open]) { overflow: hidden; }
+@media (max-width: 760px) {
+  .education.certificate-card { gap: 24px; align-items: flex-start; }
+  .certificate-preview { flex-basis: 140px; }
+  .certificate-info { flex-basis: 260px; }
+  .certificate-meta > div { display: block; }
+  .certificate-meta dd { margin-top: 2px; }
+  .certificate-dialog { padding: 14px; }
+  .certificate-dialog-header { gap: 10px; }
+}

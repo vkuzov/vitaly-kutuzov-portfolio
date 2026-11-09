@@ -1,3 +1,4 @@
+import EducationCertificate from '../components/EducationCertificate';
 import { siteUrl } from '../config/urls';
 import { useEffect } from 'react';
 import { profile, skills, directions, dossierSkills } from '../data/profile';
@@ -56,7 +57,7 @@ export default function Home() {
     </section></Reveal>
     <Reveal><section id="about" className="content-section section-anchor" aria-labelledby="about-title"><div className="about-header"><div><p className="eyebrow">04 / ОБО МНЕ</p><h2 id="about-title">За интерфейсом —<br /><span className="muted-title">любопытство.</span></h2></div><div className="about-copy"><p>{profile.bio}</p><p>Учусь на собственных задачах: от структуры страниц до пограничных сценариев. Показываю конкретные примеры и честно обозначаю, что ещё изучаю.</p></div></div>
       <div className="skills-grid">{skills.map((skill, index) => <div className="skill" key={skill.title}><span className="skill-number">0{index + 1}</span><h3>{skill.title}</h3><p>{skill.detail}</p><div className="skill-tags">{skill.tags.map(tag => <span key={tag}>{tag}</span>)}</div></div>)}</div>
-      <Spotlight className="education"><div className="education-icon" aria-hidden="true">↗</div><div className="education-text"><span className="eyebrow">ОБУЧЕНИЕ</span><h3>{profile.education.title}</h3><p>{profile.education.description}</p></div>{profile.education.document ? <a className="button button-secondary" href={siteUrl(profile.education.document)} target="_blank" rel="noreferrer">Документ <span aria-hidden="true">↗</span></a> : <span className="document-placeholder">Документ пока не добавлен</span>}</Spotlight>
+      <EducationCertificate />
     </section></Reveal>
     <Reveal><Contacts /></Reveal>
   </main>;

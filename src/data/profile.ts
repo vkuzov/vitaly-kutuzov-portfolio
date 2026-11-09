@@ -9,12 +9,17 @@ export const profile = {
     telegramLabel: '@Raziel_No_Flag',
     phone: '+79775939014',
     phoneLabel: '+7 (977) 593-90-14',
+    github: 'https://github.com/vkuzov',
     resume: null as string | null,
   },
   education: {
-    title: 'QA · Skillbox',
-    description: 'Изучаю тестирование и связываю обучение с практикой на собственных проектах.',
-    document: null as string | null, // Например: '/documents/skillbox.pdf'
+    title: 'Инженер по ручному тестированию 3.0',
+    description: 'Сертификат о прохождении курса Skillbox.',
+    document: '/images/skillbox-certificate.jpg',
+    issuer: 'Skillbox',
+    certificateNumber: 'SKB00498790',
+    certificateDate: '2026-07-17',
+    certificateDateLabel: '17.07.2026',
   },
 };
 
